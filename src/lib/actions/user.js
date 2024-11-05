@@ -12,6 +12,7 @@ export const createOrUpdateUser = async (
 ) => {
   try {
     await connect();
+
     const user = await User.findOneAndUpdate(
       { clerkId: id },
       {
@@ -19,12 +20,13 @@ export const createOrUpdateUser = async (
           firstName: first_name,
           lastName: last_name,
           avatar: image_url,
-          email: email_addresses[0].email_address,
-          username,
+          email: email_addresses[0].email,
+          username: username,
         },
       },
       { new: true, upsert: true }
     );
+
     return user;
   } catch (error) {
     console.log('Error creating or updating user:', error);
@@ -34,6 +36,7 @@ export const createOrUpdateUser = async (
 export const deleteUser = async (id) => {
   try {
     await connect();
+
     await User.findOneAndDelete({ clerkId: id });
   } catch (error) {
     console.log('Error deleting user:', error);
