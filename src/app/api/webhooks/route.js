@@ -2,9 +2,11 @@ import { Webhook } from 'svix';
 import { headers } from 'next/headers';
 import { createOrUpdateUser, deleteUser } from '../../../lib/actions/user';
 
+console.log("Hello, came here");
 export async function POST(req) {
   // You can find this in the Clerk Dashboard -> Webhooks -> choose the endpoint
   const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET;
+  console.log("Webhook secret ", WEBHOOK_SECRET);
 
   if (!WEBHOOK_SECRET) {
     throw new Error(
